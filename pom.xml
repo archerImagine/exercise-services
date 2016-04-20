@@ -10,7 +10,7 @@
     <name>exercise-services</name>
 
     <build>
-        <finalName>exercise-services</finalName>
+        <finalName>exercise-services</finalName> 
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
