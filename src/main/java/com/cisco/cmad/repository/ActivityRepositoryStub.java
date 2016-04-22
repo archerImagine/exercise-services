@@ -47,4 +47,16 @@ public class ActivityRepositoryStub implements ActivityRepository {
 		return activity1;
 	}
 
+	@Override
+	public void create(Activity activity) {
+		//Should Issue an Insert in data base.
+		
+		Activity myActivity = activity;
+		
+		System.out.println("ActivityRepositoryStub.create(): " +myActivity.getDescription());
+		System.out.println("ActivityRepositoryStub.create(): " +myActivity.getDuration());
+		System.out.println("ActivityRepositoryStub.create(): " +myActivity.getId());
+		
+	}
+
 }
