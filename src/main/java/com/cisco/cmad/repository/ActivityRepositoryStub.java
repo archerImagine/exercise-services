@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cisco.cmad.model.Activity;
+import com.cisco.cmad.model.ActivitySearch;
 import com.cisco.cmad.model.User;
 
 public class ActivityRepositoryStub implements ActivityRepository {
@@ -79,6 +80,66 @@ public class ActivityRepositoryStub implements ActivityRepository {
 	public void delete(String activityID) {
 		// Delete from activity 
 		
+	}
+
+	@Override
+	public List<Activity> findByDescription(List<String> description) {
+		// Select Statement against the database.
+		List<Activity> activities = new ArrayList<Activity>();
+		
+		Activity activity1 = new Activity();
+		
+		activity1.setDescription("Swiming");
+		activity1.setDuration(55);		
+		activities.add(activity1);
+		
+		Activity activity2 = new Activity();
+		
+		activity2.setDescription("Cycling");
+		activity2.setDuration(120);
+		activities.add(activity2);
+		
+		return activities;
+	}
+
+	@Override
+	public List<Activity> findByDescription(List<String> description, int durationFrom, int durationTo) {
+		// Select Statement against the database.
+		List<Activity> activities = new ArrayList<Activity>();
+		
+		Activity activity1 = new Activity();
+		
+		activity1.setDescription("Swiming");
+		activity1.setDuration(55);		
+		activities.add(activity1);
+		
+		Activity activity2 = new Activity();
+		
+		activity2.setDescription("Cycling");
+		activity2.setDuration(120);
+		activities.add(activity2);
+		
+		return activities;
+	}
+
+	@Override
+	public List<Activity> findByConstratints(ActivitySearch search) {
+		// Select Statement against the database.
+		List<Activity> activities = new ArrayList<Activity>();
+		
+		Activity activity1 = new Activity();
+		
+		activity1.setDescription("Swiming");
+		activity1.setDuration(55);		
+		activities.add(activity1);
+		
+		Activity activity2 = new Activity();
+		
+		activity2.setDescription("Cycling");
+		activity2.setDuration(120);
+		activities.add(activity2);
+		
+		return activities;
 	}
 
 }

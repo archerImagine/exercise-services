@@ -2,10 +2,15 @@ package com.cisco.cmad.client;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.ws.rs.core.Response;
+
 import org.junit.Test;
 
 import com.cisco.cmad.model.Activity;
+import com.cisco.cmad.model.ActivitySearch;
 
 public class ActivityClientTest {
 
@@ -69,6 +74,59 @@ public class ActivityClientTest {
 	public void testDelete(){
 		ActivityClient client = new ActivityClient();
 		client.delete("1234");
+	}
+	
+	@Test
+	public void testSearch(){
+		ActivitySearchClient client = new ActivitySearchClient();
+		String param = "description";
+		List<String> searchValues = new ArrayList<String>();
+		searchValues.add("Swimming");
+		searchValues.add("running");
+		
+		List<Activity> activities = client.search(param, searchValues);
+		System.out.println("ActivityClientTest.testSearch(): activities: " + activities);
+		
+		assertNotNull(activities);
+	}
+	@Test
+	public void testSearchRange(){
+		ActivitySearchClient client = new ActivitySearchClient();
+		String param = "description";
+		List<String> searchValues = new ArrayList<String>();
+		searchValues.add("Swimming");
+		searchValues.add("running");
+		
+		String secondParam = "durationFrom";
+		int durationFrom = 30;
+		
+		String thirdParam = "durationTo";
+		int durationTo = 55;
+		
+		List<Activity> activities = client.search(param, searchValues, secondParam, durationFrom, thirdParam, durationTo);
+		System.out.println("ActivityClientTest.testSearch(): activities: " + activities);
+		
+		assertNotNull(activities);
+	}
+	
+	@Test
+	public void testSearchObject(){
+		ActivitySearchClient client = new ActivitySearchClient();
+		List<String> searchValues = new ArrayList<String>();
+		
+		searchValues.add("Swimming");
+		searchValues.add("running");
+		
+		ActivitySearch search = new ActivitySearch();
+		search.setDescription(searchValues);
+		search.setDurationFrom(30);
+		search.setDurationTo(55);
+		
+		List<Activity> activities = client.search(search);
+		
+		System.out.println("ActivityClientTest.testSearchObject()" +activities);
+		assertNotNull(activities);
+		
 	}
 
 }
