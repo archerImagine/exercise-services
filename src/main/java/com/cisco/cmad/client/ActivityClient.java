@@ -79,4 +79,15 @@ public class ActivityClient {
 		return response.readEntity(Activity.class);
 	}
 
+	public void delete(String activityID) {
+		System.out.println("ActivityClient.delete()" +activityID);
+		WebTarget target = client.target(this.rootEnd);
+		Response response = target.path("activities/" +activityID)
+				.request(MediaType.APPLICATION_JSON)
+				.delete();
+		if (response.getStatus() != 200) {
+			throw new RuntimeException(response.getStatus() + ": this is an error");
+		}
+	}
+
 }

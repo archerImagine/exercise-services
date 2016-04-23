@@ -3,6 +3,7 @@ package com.cisco.cmad;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -110,5 +111,16 @@ public class ActivityResource {
 		
 		return Response.ok().entity(activity).build();
 	}
-
+	
+	@DELETE
+	@Path("{activityID}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Response delete(@PathParam("activityID") String activityID){
+		System.out.println("ActivityResource.delete() : " +activityID);
+		
+		activityRepository.delete(activityID);
+		return Response.ok().build();
+		
+	}
 }
