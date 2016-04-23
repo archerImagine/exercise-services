@@ -67,4 +67,16 @@ public class ActivityClient {
 		return response.readEntity(Activity.class);
 	}
 
+	public Activity update(Activity activity) {
+		WebTarget target = client.target(this.rootEnd);
+		Response response = target.path("activities/" +activity.getId())
+				.request(MediaType.APPLICATION_JSON)
+				.put(Entity.entity(activity, MediaType.APPLICATION_JSON));
+		
+		if (response.getStatus() != 200) {
+			throw new RuntimeException(response.getStatus() + ": this is an error");
+		}
+		return response.readEntity(Activity.class);
+	}
+
 }
