@@ -10,6 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.cisco.cmad.model.Activity;
 import com.cisco.cmad.model.User;
@@ -59,11 +61,32 @@ public class ActivityResource {
 		return activityRepository.findAllActivity();
 	}
 	
-	@GET
+	/*@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Path("{activityID}")
 	public Activity getActivity(@PathParam("activityID") String activityID){
 		return activityRepository.findActivity(activityID);
+	}*/
+	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@Path("{activityID}")
+	public Response getActivity(@PathParam("activityID") String activityID){
+		System.out.println("ActivityResource.getActivity() id: " +activityID);
+		Response response = null;
+		if (activityID == null || activityID.length() < 4) {
+			System.out.println("ActivityResource.getActivity(): BAD Request");
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		Activity activity = activityRepository.findActivity(activityID);
+		if (activity == null) {
+			System.out.println("ActivityResource.getActivity(): NOT FOUND");
+			return Response.status(Status.NOT_FOUND).build();
+		}else{
+			System.out.println("ActivityResource.getActivity(): OK Request");
+			return Response.ok().entity(activity).build();
+		}
+		
 	}
 	
 	@GET
